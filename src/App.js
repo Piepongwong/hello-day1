@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   randomStudent = ()=> {
-    this.setState({random: students[Math.ceil(Math.random()*students.length)]})
+    this.setState({random: students[Math.floor(Math.random()*students.length)]})
   }
 
   render() {

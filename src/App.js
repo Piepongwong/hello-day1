@@ -7,35 +7,27 @@ import students from "./students.json";
 // https://wd-ft-feb.s3.eu-central-1.amazonaws.com/alena.pn
 class App extends Component {
   state = {
-    counter: 0
+    counter: 0,
+    students: students,
+    random: students[Math.ceil(Math.random()*students.length)]
   };
 
   increment = ()=>{
     this.setState({counter: this.state.counter + 1});
   };
 
+  randomStudent = ()=> {
+    this.setState({random: students[Math.ceil(Math.random()*students.length)]})
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Count {this.state.counter}</h1>
         <button onClick={this.increment}>increment</button>
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Ironhack</h2>
-        </div>
-        <Bootcamp bootcampType="Web dev FT"/>
-        <Bootcamp bootcampType="UX/UI FT"/>
+        <button onClick={this.randomStudent}>Choose random student!</button>
 
-        {students.map((student)=> 
-          <Student 
-            firstname={student.firstname} 
-            image={`https://wd-ft-feb.s3.eu-central-1.amazonaws.com/${student.firstname.toLowerCase()}.png`}
-          />)
-        }
-        <Student firstname="Elena"/>
-        <Student firstname="Shabeer"/>
-        <Student firstname="Sybille"/>
-
+        <Student firstname={this.state.random.firstname} image={`https://wd-ft-feb.s3.eu-central-1.amazonaws.com/${this.state.random.firstname.toLowerCase()}.png`}/>
       </div>
     );
   }

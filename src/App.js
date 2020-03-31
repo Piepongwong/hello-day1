@@ -9,7 +9,7 @@ class App extends Component {
   
   state = {
     counter: 0,
-    students: students,
+    students: students.slice(0,5),
     random: students[Math.floor(Math.random()*students.length)]
   };
 
@@ -18,7 +18,11 @@ class App extends Component {
   };
 
   randomStudent = ()=> {
-    this.setState({random: students[Math.floor(Math.random()*students.length)]})
+    
+    // let newStudents = this.state.students.push(students[Math.floor(Math.random()*students.length)]); // no good
+    let studentsCopy = [...this.state.students];
+    studentsCopy.push(students[Math.floor(Math.random()*students.length)]);
+    this.setState({students: studentsCopy});
   }
 
   render() {

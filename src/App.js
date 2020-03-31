@@ -6,33 +6,40 @@ import Bootcamp from "./components/Bootcamp";
 import students from "./students.json";
 
 class App extends Component {
-  
+
   state = {
     counter: 0,
     students: students,
-    random: students[Math.ceil(Math.random()*students.length)]
+    filteredStudents: students
   };
 
   increment = ()=>{
     this.setState({counter: this.state.counter + 1});
   };
 
-  randomStudent = ()=> {
-    this.setState({random: students[Math.ceil(Math.random()*students.length)]})
-  }
+  filterStudents = (e)=> {
+    let filterTheStudents = this.state.students.filter((student)=> {
+      return(
+      student.firstname.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      student.lastname.toLowerCase().includes(e.target.value.toLowerCase()) 
+    )});
 
+    this.setState({filteredStudents: filterTheStudents});
+  }
   render() {
     return (
       <div className="App">
         <h1>Count {this.state.counter}</h1>
-        <button onClick={this.increment}>increment</button>
-
-        <button onClick={this.randomStudent}>Choose random student!</button>
-
-        <Student 
-            firstname={this.state.random.firstname} 
-            image={`https://wd-ft-feb.s3.eu-central-1.amazonaws.com/${this.state.random.firstname.toLowerCase()}.png`}
-        />
+        <button onClick={this.increment}>increment</button>   
+        <h1>Search Students</h1>
+        <input type="text" onChange={this.filterStudents}/>
+        {this.state.filteredStudents.map((student)=> (
+          <Student 
+            firstname={student.firstname} 
+            lastname={student.lastname}
+            image={`https://wd-ft-feb.s3.eu-central-1.amazonaws.com/${student.firstname.toLowerCase()}.png`}
+          />
+        ))}
       </div>
     );
   }

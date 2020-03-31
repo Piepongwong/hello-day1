@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     counter: 0,
     students: students,
-    random: students[Math.ceil(Math.random()*students.length)]
+    random: students[Math.floor(Math.random()*students.length)]
   };
 
   increment = ()=>{

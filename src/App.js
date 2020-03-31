@@ -4,8 +4,9 @@ import './App.css';
 import Student from "./components/Student";
 import Bootcamp from "./components/Bootcamp";
 import students from "./students.json";
-// https://wd-ft-feb.s3.eu-central-1.amazonaws.com/alena.pn
+
 class App extends Component {
+  
   state = {
     counter: 0,
     students: students,
@@ -25,9 +26,13 @@ class App extends Component {
       <div className="App">
         <h1>Count {this.state.counter}</h1>
         <button onClick={this.increment}>increment</button>
+
         <button onClick={this.randomStudent}>Choose random student!</button>
 
-        <Student firstname={this.state.random.firstname} image={`https://wd-ft-feb.s3.eu-central-1.amazonaws.com/${this.state.random.firstname.toLowerCase()}.png`}/>
+        <Student 
+            firstname={this.state.random.firstname} 
+            image={`https://wd-ft-feb.s3.eu-central-1.amazonaws.com/${this.state.random.firstname.toLowerCase()}.png`}
+        />
       </div>
     );
   }
